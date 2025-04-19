@@ -17,7 +17,7 @@ import WhyChoose from "./WhyChoose";
 
 const Hero = () => {
   return (
-    <section className="relative pt-16 xs:pt-20 sm:pt-28 md:pt-32 lg:pt-40 pb-12 xs:pb-14 sm:pb-16 md:pb-20 lg:pb-24 px-3 xs:px-4 sm:px-6 lg:px-10 flex flex-col justify-between items-start min-h-screen">
+    <section className="relative pt-16 xs:pt-20 mt-12 sm:pt-28 md:pt-32 lg:pt-40 pb-12 xs:pb-14 sm:pb-16 md:pb-20 lg:pb-24 px-3 xs:px-4 sm:px-6 lg:px-10 flex flex-col justify-between items-start min-h-screen">
       <div className="flex flex-col xs:flex-row w-full gap-4 xs:gap-6 sm:gap-8 lg:gap-12 max-w-7xl mx-auto">
         {/* Tagline */}
         <motion.div

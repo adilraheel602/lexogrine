@@ -9,7 +9,7 @@ export default function PageTransition({ children }) {
 
     const timer = setTimeout(() => {
       setShowOverlay(false);
-    }, 2500); // match curtain animation duration
+    }, 2500); // Match curtain animation duration
 
     return () => clearTimeout(timer);
   }, []);
@@ -30,14 +30,15 @@ export default function PageTransition({ children }) {
         <div className="fixed inset-0 z-[9999] bg-black overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-[150vh] bg-white animate-curtain-drop">
             <svg
-              className="absolute bottom-0 w-full"
+              className="absolute bottom-0 w-full h-[30vh]" // Set explicit height to ensure coverage
               viewBox="0 0 1440 320"
               preserveAspectRatio="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 fill="#000000"
-                d="M0,96L48,122.7C96,149,192,203,288,202.7C384,203,480,149,576,117.3C672,85,768,75,864,106.7C960,139,1056,213,1152,240C1248,267,1344,245,1392,234.7L1440,224L1440,320L0,320Z"
+                // Adjusted path to start at y=0 and end at y=320 to remove transparent areas
+                d="M0,0L48,26.7C96,53,192,107,288,106.7C384,107,480,53,576,21.3C672,-11,768,-21,864,10.7C960,43,1056,117,1152,144C1248,171,1344,149,1392,138.7L1440,128L1440,320L0,320Z"
               />
             </svg>
           </div>

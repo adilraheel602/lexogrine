@@ -1,58 +1,45 @@
 import { motion } from "framer-motion";
+import clutch from "../Images/clutch.svg";
 
 export default function Footer() {
-  // 8 randomized "bubbles"
-  const bubbles = Array.from({ length: 8 }).map((_, i) => ({
-    size: Math.random() * 20 + 10,
-    left: Math.random() * 90 + "%",
-    delay: Math.random() * 3,
-    duration: Math.random() * 2 + 2,
+  const bubbles = Array.from({ length: 25 }).map((_, i) => ({
+    size: Math.random() * 15 + 10,
+    left: Math.random() * 100 + "%",
+    delay: Math.random() * 2,
+    duration: Math.random() * 2 + 1.5,
     key: i,
   }));
 
   return (
     <div className="relative w-full">
-      {/* Bubble Animation Section */}
-      <div>
-        <div className="relative w-full h-36 sm:h-48 mt-16 sm:mt-24 bg-black rounded-t-[60px] sm:rounded-t-[100px] z-10 overflow-hidden">
-          {bubbles.map((bubble) => (
-            <motion.div
-              key={bubble.key}
-              className="absolute bottom-0 opacity-30 filter blur-sm"
-              style={{
-                width: bubble.size * 3,
-                height: bubble.size * 3,
-                left: bubble.left,
-              }}
-              initial={{ y: 0, opacity: 0.3 }}
-              animate={{ y: -100, opacity: 0 }}
-              transition={{
-                duration: bubble.duration,
-                delay: bubble.delay,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <svg
-                viewBox="0 0 200 200"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-full h-full"
-                fill="#fff"
-              >
-                <path
-                  d="M45.3,-47.6C59.1,-33.8,70.7,-16.9,69.9,-1.1C69.2,14.8,56.1,29.6,42.3,42.1C28.6,54.6,14.3,64.8,-1.6,66.2C-17.6,67.5,-35.2,60.1,-44.3,47.1C-53.5,34,-54.3,15.4,-51.8,-2.3C-49.4,-19.9,-43.6,-36.5,-32.6,-50.1C-21.5,-63.7,-10.8,-74.4,2,-76.6C14.7,-78.8,29.4,-72.4,45.3,-60.5Z"
-                  transform="translate(100 100)"
-                />
-              </svg>
-            </motion.div>
-          ))}
-        </div>
+      {/* Boiling Water Drops Effect */}
+      <div className="absolute -top-20 left-0 w-full h-60 z-20 pointer-events-none overflow-visible">
+        {bubbles.map((bubble) => (
+          <motion.div
+            key={bubble.key}
+            className="absolute bottom-0 rounded-full bg-white"
+            style={{
+              width: `${bubble.size}px`,
+              height: `${bubble.size}px`,
+              left: bubble.left,
+              filter: "blur(2px)",
+              mixBlendMode: "exclusion",
+            }}
+            initial={{ y: 0, opacity: 0.3 }}
+            animate={{ y: -100, opacity: 0 }}
+            transition={{
+              duration: bubble.duration,
+              delay: bubble.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          ></motion.div>
+        ))}
       </div>
 
       {/* Footer Content */}
-      <footer className="bg-black text-white px-4 sm:px-6 md:px-12 lg:px-16 py-12 sm:py-16">
+      <footer className="bg-black text-white px-4 sm:px-6 md:px-12 lg:px-16 py-12 sm:py-16 rounded-t-[60px] sm:rounded-t-[100px] relative z-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
-          {/* Left Column */}
           <div className="space-y-4 sm:space-y-6">
             <div className="text-3xl sm:text-4xl font-bold text-white">E</div>
             <div className="space-y-1">
@@ -68,7 +55,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Center Column - Menu */}
           <div className="flex flex-col gap-4 sm:gap-6">
             <h4 className="text-base sm:text-lg font-semibold">Menu</h4>
             <ul className="text-gray-400 space-y-2">
@@ -83,7 +69,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Right Column - Contact */}
           <div className="flex flex-col gap-4 sm:gap-6">
             <h4 className="text-base sm:text-lg font-semibold">Contact</h4>
             <ul className="text-gray-400 space-y-2">
@@ -99,16 +84,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Row */}
         <div className="max-w-7xl mx-auto mt-8 sm:mt-12 flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-8">
-          {/* Clutch Review */}
           <div className="flex flex-wrap items-center gap-2 sm:gap-4 justify-center sm:justify-start">
             <p className="text-xs sm:text-sm text-white">REVIEWED ON</p>
-            <img
-              src="https://assets.clutch.co/static/images/logo--clutch.svg"
-              alt="Clutch"
-              className="h-4 sm:h-5"
-            />
+            <img src={clutch} alt="Clutch" className="h-4 sm:h-5" />
             <div className="flex items-center gap-0.5 sm:gap-1 text-lg sm:text-xl text-red-500">
               {Array.from({ length: 5 }).map((_, i) => (
                 <span
@@ -122,7 +101,6 @@ export default function Footer() {
             <p className="text-xs sm:text-sm text-white">25 REVIEWS</p>
           </div>
 
-          {/* Social Icons */}
           <div className="flex gap-4 sm:gap-6 text-lg sm:text-xl text-gray-400">
             {["in", "⚽", "f"].map((icon, index) => (
               <a

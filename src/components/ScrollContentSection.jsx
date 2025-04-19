@@ -63,6 +63,7 @@ export default function ScrollContentSection() {
       const sectionHeight = window.innerHeight;
       const totalHeight = sections.length * sectionHeight;
 
+      // Calculate the current section index
       const newIndex = Math.floor(scrollTop / sectionHeight);
       if (newIndex !== index) {
         setShowTransition(true);
@@ -70,9 +71,22 @@ export default function ScrollContentSection() {
         setTimeout(() => setShowTransition(false), 1000);
       }
 
-      setIsPinned(
-        rect.top <= 0 && Math.abs(rect.top) < totalHeight - sectionHeight
-      );
+      // Adjusted pinning logic with buffer
+      const startPin = 0; // Start pinning when wrapper reaches top of viewport
+      const endPin = totalHeight - sectionHeight + sectionHeight * 0.1; // Extend pinning slightly (10% buffer)
+
+      // Pin the content when within the scrollable range
+      const shouldPin = scrollTop >= startPin && scrollTop <= endPin;
+      setIsPinned(shouldPin);
+
+      // Optional: Debug scroll values
+      // console.log({
+      //   scrollTop,
+      //   isPinned: shouldPin,
+      //   index: newIndex,
+      //   endPin,
+      //   rectTop: rect.top,
+      // });
     };
 
     window.addEventListener("scroll", onScroll);
@@ -96,11 +110,13 @@ export default function ScrollContentSection() {
     <div
       ref={wrapperRef}
       className="relative w-full"
-      style={{ height: `${sections.length * 100}vh`, marginTop: "-100vh" }}
+      style={{ height: `${sections.length * 100}vh` }}
     >
       <div
         className={`w-full h-screen z-30 transition-all duration-300 ${
-          isPinned ? "fixed top-0" : "absolute top-full"
+          isPinned
+            ? "fixed top-0"
+            : `absolute ${index === sections.length - 1 ? "bottom-0" : "top-0"}`
         } flex flex-col lg:flex-row bg-white font-satoshi overflow-hidden`}
       >
         {/* CURTAIN WIPE TRANSITION */}
@@ -166,7 +182,7 @@ export default function ScrollContentSection() {
               animate={{ clipPath: "circle(150% at 50% 50%)", opacity: 1 }}
               exit={{ clipPath: "circle(0% at 50% 50%)", opacity: 0 }}
               transition={{ duration: 1.4, ease: "easeInOut" }}
-              className="overflow-hidden shadow-2xl border border-gray-300 w-full h-full max-w-[95%] sm:max-w-[90%] max-h-[75%] sm:max-h-[85%] rounded-xl sm:rounded-2xl mx-auto"
+              className="overflow-hidden shadow-2xl border border-gray-300 w-full h-full max-w-[95%] sm:max-w-[90%] max-h-[75%] sm:max-h-[85%] rounded-xl sm:rounded-xl mx-auto"
             >
               <img
                 src={current.image}
@@ -188,7 +204,6 @@ export default function ScrollContentSection() {
           View
         </div>
       )}
-      <div className="mt-52"></div>
     </div>
   );
 }

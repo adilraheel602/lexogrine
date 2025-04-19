@@ -12,7 +12,6 @@ const App = () => (
     <div className="bg-white min-h-screen">
       <Navbar />
       <Hero />
-      <SidebarTabs />
       <Footer />
     </div>
   </PageTransition>

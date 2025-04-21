@@ -8,11 +8,12 @@ const StatsSection = () => {
       <div className="relative w-full overflow-hidden">
         <motion.div
           className="flex whitespace-nowrap"
-          animate={{ x: ["0%", "-100%"] }}
+          animate={{ x: ["0%", "-50%"] }} // Translate by half the width (since content is duplicated)
           transition={{
             duration: 20,
             ease: "linear",
             repeat: Infinity,
+            repeatType: "loop",
           }}
         >
           {/* Repeat the content twice for seamless loop */}

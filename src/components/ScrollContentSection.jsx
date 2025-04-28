@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import screen from "../Images/screen.png";
 import screen01 from "../Images/screen01.png";
 import screen02 from "../Images/screen02.png";
 import screen03 from "../Images/screen03.png";
 import screen04 from "../Images/screen04.png";
-import { motion, AnimatePresence } from "framer-motion";
 
 const sections = [
   {
@@ -113,37 +113,21 @@ export default function ScrollContentSection() {
       style={{ height: `${sections.length * 100}vh` }}
     >
       <div
-        className={`w-full h-screen z-30 transition-all duration-300 ${
-          isPinned
+        className={`w-full h-screen z-30 
+                 transition-all duration-300 
+                 ${isPinned
             ? "fixed top-0"
             : `absolute ${index === sections.length - 1 ? "bottom-0" : "top-0"}`
-        } flex flex-col lg:flex-row bg-white font-satoshi overflow-hidden`}
+          } 
+                 flex flex-col lg:flex-row 
+                 bg-white font-satoshi 
+                 overflow-hidden`}
       >
-        {/* CURTAIN WIPE TRANSITION */}
-        <AnimatePresence>
-          {showTransition && (
-            <motion.div
-              key={`wipe-${index}`}
-              initial={{
-                clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-                opacity: 1,
-              }}
-              animate={{
-                clipPath: "polygon(0 0, 100% 10%, 100% 90%, 0 100%)",
-                opacity: 1,
-              }}
-              exit={{
-                clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-                opacity: 0,
-              }}
-              transition={{ duration: 1.2, ease: "easeInOut" }}
-              className="absolute inset-0 bg-white z-10 pointer-events-none"
-            />
-          )}
-        </AnimatePresence>
-
-        {/* LEFT: Scrollable Content with Animated Slide-Up */}
-        <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 lg:p-10 relative overflow-hidden z-20">
+        {/* Left Content Section */}
+        <div className="w-full lg:w-1/2 
+                     flex items-center justify-center 
+                     p-4 sm:p-6 md:p-8 lg:p-10 
+                     relative overflow-hidden z-20">
           <AnimatePresence mode="wait">
             <motion.div
               key={`section-left-${index}`}
@@ -151,27 +135,48 @@ export default function ScrollContentSection() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -100, opacity: 0 }}
               transition={{ duration: 1.2 }}
-              className="flex flex-col border border-gray-400 px-4 sm:px-6 lg:px-10 py-8 sm:py-12 lg:py-16 space-y-4 bg-white shadow-sm w-full max-w-md z-20"
+              className="flex flex-col 
+                       border border-gray-400 
+                       px-4 sm:px-6 md:px-8 lg:px-10 
+                       py-8 sm:py-10 md:py-12 lg:py-16 
+                       space-y-4 sm:space-y-5 md:space-y-6 
+                       bg-white 
+                       shadow-sm hover:shadow-md 
+                       transition-shadow duration-300 
+                       w-full max-w-md z-20"
             >
-              <div className="text-xs sm:text-sm text-gray-800 flex items-center gap-2 sm:gap-3">
+              <div className="text-xs sm:text-sm md:text-base 
+                          text-gray-800 
+                          flex items-center 
+                          gap-2 sm:gap-3">
                 <span className="font-semibold">{current.tag}</span>
                 <span className="h-4 w-px bg-gray-400" />
                 <span>{current.time}</span>
               </div>
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-snug">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl 
+                          font-bold text-gray-900 
+                          leading-snug sm:leading-tight">
                 {current.title}
               </h1>
-              <p className="text-sm sm:text-base text-gray-500">
+              <p className="text-sm sm:text-base md:text-lg 
+                        text-gray-500 
+                        leading-relaxed">
                 {current.subtitle}
               </p>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* RIGHT: Image Window */}
+        {/* Right Image Section */}
         <div
           ref={imageContainerRef}
-          className="w-full lg:w-1/2 bg-white items-center justify-center lg:mr-8 xl:mr-44 z-20 p-4 sm:p-6 lg:p-8 relative"
+          className="w-full lg:w-1/2 
+                   bg-white 
+                   items-center justify-center 
+                   lg:mr-8 xl:mr-44 
+                   z-20 
+                   p-4 sm:p-6 md:p-8 lg:p-10 
+                   relative"
           onMouseEnter={() => setShowCursor(true)}
           onMouseLeave={() => setShowCursor(false)}
         >
@@ -182,23 +187,48 @@ export default function ScrollContentSection() {
               animate={{ clipPath: "circle(150% at 50% 50%)", opacity: 1 }}
               exit={{ clipPath: "circle(0% at 50% 50%)", opacity: 0 }}
               transition={{ duration: 1.4, ease: "easeInOut" }}
-              className="overflow-hidden shadow-2xl border border-gray-300 w-full h-full max-w-[95%] sm:max-w-[90%] max-h-[75%] sm:max-h-[85%] rounded-xl sm:rounded-xl mx-auto"
+              className="overflow-hidden 
+                       shadow-2xl hover:shadow-3xl 
+                       border border-gray-300 
+                       w-full h-full 
+                       max-w-[95%] sm:max-w-[90%] md:max-w-[85%] 
+                       max-h-[75%] sm:max-h-[80%] md:max-h-[85%] 
+                       rounded-xl sm:rounded-2xl md:rounded-3xl 
+                       mx-auto 
+                       transition-all duration-300"
             >
               <img
                 src={current.image}
                 alt={current.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full 
+                        object-cover 
+                        transition-transform duration-500 
+                        hover:scale-105"
+                loading="lazy"
               />
             </motion.div>
           </AnimatePresence>
         </div>
       </div>
 
-      {/* BUBBLE CURSOR */}
+      {/* Custom Cursor */}
       {showCursor && (
         <div
           ref={cursorRef}
-          className="fixed z-50 w-16 sm:w-20 h-16 sm:h-20 bg-purple-600 text-white rounded-full flex items-center justify-center pointer-events-none text-xs sm:text-sm font-semibold shadow-xl transition-all duration-300"
+          className="fixed z-50 
+                   w-16 sm:w-18 md:w-20 
+                   h-16 sm:h-18 md:h-20 
+                   bg-purple-600 
+                   text-white 
+                   rounded-full 
+                   flex items-center justify-center 
+                   pointer-events-none 
+                   text-xs sm:text-sm md:text-base 
+                   font-semibold 
+                   shadow-xl 
+                   transition-all duration-300 
+                   backdrop-blur-sm 
+                   bg-opacity-90"
           style={{ transform: "translate(-50%, -50%)" }}
         >
           View

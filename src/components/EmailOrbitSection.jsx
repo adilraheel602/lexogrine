@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { motion } from "framer-motion"; // Import Framer Motion
 import stay from "../Images/stay.png";
 import bubbles from "../Images/bubbles.jpg";
 
@@ -23,28 +24,55 @@ const EmailOrbitSection = () => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full min-h-screen overflow-hidden bg-white"
+      className="relative w-full min-h-[100vh] overflow-hidden bg-white"
     >
-      {/* Floating dashed bubble */}
+      {/* Floating dashed bubble with improved responsiveness */}
       <div
         ref={bubbleRef}
-        className="absolute w-[200px] sm:w-[250px] lg:w-[300px] h-[200px] sm:h-[250px] lg:h-[300px] rounded-full border border-dashed border-purple-300 opacity-40 backdrop-blur-sm transition-all duration-300 ease-out pointer-events-none z-0"
+        className="absolute w-[180px] sm:w-[220px] md:w-[260px] lg:w-[300px] 
+                   h-[180px] sm:h-[220px] md:h-[260px] lg:h-[300px] 
+                   rounded-full border border-dashed border-purple-300/40 
+                   opacity-40 backdrop-blur-sm transition-all duration-300 
+                   ease-out pointer-events-none z-0"
       />
 
-      {/* Main content */}
-      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center h-full px-4 sm:px-6 lg:px-20 py-10 gap-8 lg:gap-12">
-        {/* Left Bubble Image with rounded top-left */}
-        <div className="w-[280px] sm:w-[340px] lg:w-[420px] h-[280px] sm:h-[340px] lg:h-[420px] overflow-hidden lg:mr-8 rounded-tl-[100px] sm:rounded-tl-[140px] lg:rounded-tl-full">
+      {/* Main content with better spacing */}
+      <div className="relative z-10 flex flex-col lg:flex-row items-center 
+                    justify-center h-full px-4 sm:px-8 md:px-12 lg:px-20 
+                    py-8 sm:py-12 lg:py-16 gap-6 sm:gap-8 lg:gap-12">
+        {/* Left Bubble Image with enhanced responsiveness */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="w-[260px] sm:w-[320px] md:w-[380px] lg:w-[420px] 
+                      h-[260px] sm:h-[320px] md:h-[380px] lg:h-[420px] 
+                      overflow-hidden lg:mr-8 
+                      rounded-tl-[80px] sm:rounded-tl-[120px] md:rounded-tl-[160px] lg:rounded-tl-full 
+                      transition-all duration-300 ease-in-out 
+                      shadow-lg hover:shadow-xl"
+        >
           <img
             src={bubbles}
             alt="Bubbles"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-105"
+            loading="lazy"
           />
-        </div>
+        </motion.div>
 
-        {/* Orbit Email Icon in center top */}
-        <div className="absolute top-[140px] left-1/2 transform -translate-x-1/2 z-20 hidden lg:block">
-          <div className="relative w-[120px] sm:w-[140px] lg:w-[160px] h-[120px] sm:h-[140px] lg:h-[160px]">
+        {/* Orbit Email Icon with improved positioning */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          viewport={{ once: true }}
+          className="absolute top-[100px] sm:top-[120px] lg:top-[140px] 
+                      left-1/2 transform -translate-x-1/2 z-20 
+                      hidden lg:block"
+        >
+          <div className="relative w-[100px] sm:w-[120px] md:w-[140px] lg:w-[160px] 
+                        h-[100px] sm:h-[120px] md:h-[140px] lg:h-[160px]">
             <svg
               width="100%"
               height="100%"
@@ -64,9 +92,15 @@ const EmailOrbitSection = () => {
                 </textPath>
               </text>
             </svg>
-            <div className="w-[80px] sm:w-[90px] lg:w-[100px] h-[80px] sm:h-[90px] lg:h-[100px] rounded-full bg-gray-200/50 shadow-xl flex items-center justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+            <div className="w-[70px] sm:w-[80px] md:w-[90px] lg:w-[100px] 
+                          h-[70px] sm:h-[80px] md:h-[90px] lg:h-[100px] 
+                          rounded-full bg-gray-200/50 backdrop-blur-sm
+                          shadow-lg hover:shadow-xl transition-all duration-300
+                          flex items-center justify-center 
+                          absolute top-1/2 left-1/2 
+                          transform -translate-x-1/2 -translate-y-1/2 z-10">
               <svg
-                className="w-5 sm:w-6 h-5 sm:h-6 text-black"
+                className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-black"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={2}
@@ -80,16 +114,32 @@ const EmailOrbitSection = () => {
               </svg>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Right: Stay in Sync Image */}
-        <div className="max-w-2xl p-4 sm:p-6 lg:p-10 mt-8 sm:mt-16 lg:mt-36 w-full">
+        {/* Right: Stay in Sync Image with enhanced styling */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+          viewport={{ once: true }}
+          className="max-w-2xl w-full 
+                      p-3 sm:p-4 md:p-6 lg:p-10 
+                      mt-6 sm:mt-12 md:mt-24 lg:mt-36 
+                      transition-all duration-300"
+        >
           <img
             src={stay}
             alt="Stay in Sync"
-            className="w-full rounded-[12px] sm:rounded-[16px] lg:rounded-[20px] border-[20px] sm:border-[40px] lg:border-[60px] border-gray-200 shadow-2xl"
+            className="w-full 
+                     rounded-[10px] sm:rounded-[14px] md:rounded-[16px] lg:rounded-[20px] 
+                     border-[16px] sm:border-[24px] md:border-[40px] lg:border-[60px] 
+                     border-gray-200/90 
+                     shadow-xl hover:shadow-2xl 
+                     transition-all duration-500 
+                     transform hover:scale-[1.02]"
+            loading="lazy"
           />
-        </div>
+        </motion.div>
       </div>
     </div>
   );

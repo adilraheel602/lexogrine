@@ -44,13 +44,6 @@ const DesignSection = () => {
           {/* Hand holding phone */}
           <div className="relative">
             {/* Logo to place inside the phone */}
-            <motion.div className="absolute top-[-20px] right-[-40px] h-10 w-10 sm:h-12 sm:w-12 z-40 bg-white rounded-xl shadow-md overflow-hidden">
-              <img
-                src={logopic}
-                alt="Logo"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
             <motion.img
               src={design01}
               alt="Hand Phone"

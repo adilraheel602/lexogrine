@@ -39,3 +39,9 @@ body {
 .wave-btn:hover::before {
   transform: translate(-50%, -50%) scale(1);
 }
+
+
+.sticky-left {
+  position: sticky !important;
+  top: 5em;
+}
